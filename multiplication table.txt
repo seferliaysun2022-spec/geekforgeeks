@@ -1,0 +1,7 @@
+a = int(input("a ədədini daxil edin: "))
+print(f"\n{a} ədədinin vurma cədvəli:")
+print("-" * 20)
+
+for i in range(1, 11):
+    nəticə = a * i
+    print(f"{a} * {i} = {nəticə}")

@@ -1,0 +1,25 @@
+print("\nÜçbucağın tərəflərini daxil edin:")
+a = float(input("a tərəfi: "))
+b = float(input("b tərəfi: "))
+c = float(input("c tərəfi: "))
+print(f"\nTərəflər: a = {a}, b = {b}, c = {c}")
+print("\nÜçbucaq qaydasını yoxlayaq:")
+print("1. a + b > c olmalıdır")
+print("2. a + c > b olmalıdır")
+print("3. b + c > a olmalıdır")
+print("YOXLAMALAR:")
+şərt1 = (a + b) > c
+print(f"1. {a} + {b} > {c}")
+print(f"   {a + b} > {c} → {şərt1}")
+şərt2 = (a + c) > b
+print(f"\n2. {a} + {c} > {b}")
+print(f"   {a + c} > {b} → {şərt2}")
+şərt3 = (b + c) > a
+print(f"\n3. {b} + {c} > {a}")
+print(f"   {b + c} > {a} → {şərt3}")
+if şərt1 and şərt2 and şərt3:
+    print(f"\n✓ BÜTÜN ŞƏRTLƏR ÖDƏNİR")
+    print(f"✓ ÜÇBUCAQ KEÇƏRLİDİR")
+else:
+    print(f"\n✗ BƏZİ ŞƏRTLƏR ÖDƏNMİR")
+    print(f"✗ ÜÇBUCAQ KEÇƏRSİZDİR")

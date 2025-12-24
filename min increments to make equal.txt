@@ -1,0 +1,34 @@
+arr = [4, 7, 19, 16]
+k = 3
+print(f"\nOrijinal massiv: {arr}")
+print(f"k dəyəri: {k}")
+print("Əməliyyat: Hər dəfə bir elementi k qədər artırmaq")
+print("Məqsəd: Bütün elementləri eyni dəyərə çatdırmaq")
+maksimum = max(arr)
+print(f"\n1. Massivin ən böyük elementi: {maksimum}")
+print("   Digər elementləri bu dəyərə çatdıracağıq")
+toplam_əməliyyat = 0
+mümkündürmü = True
+print(f"\n2. Hər elementi yoxlayırıq:")
+for i in range(len(arr)):
+    element = arr[i]
+    print(f"\n   arr[{i}] = {element}")
+    fərq = maksimum - element
+    print(f"   Maksimum - element = {maksimum} - {element} = {fərq}")
+    if fərq % k == 0:
+        əməliyyat_sayı = fərq // k
+        toplam_əməliyyat += əməliyyat_sayı
+        print(f"   {fərq} % {k} = 0 → MÜMKÜN")
+        print(f"   Əməliyyat sayı: {fərq} / {k} = {əməliyyat_sayı}")
+        print(f"   Ümumi əməliyyat: {toplam_əməliyyat}")
+    else:
+        mümkündürmü = False
+        print(f"   {fərq} % {k} = {fərq % k} ≠ 0 → MÜMKÜN DEYİL")
+        print(f"   {element} elementi heç vaxt {maksimum}-a çata bilməz!")
+        break
+if mümkündürmü:
+    print(f"✓ BÜTÜN ELEMENTLƏR BƏRABƏR EDİLƏ BİLƏR")
+    print(f"✓ Lazım olan əməliyyat sayı: {toplam_əməliyyat}")
+else:
+    print(f"✗ BÜTÜN ELEMENTLƏR BƏRABƏR EDİLƏ BİLMƏZ")
+    print(f"✗ Nəticə: -1")

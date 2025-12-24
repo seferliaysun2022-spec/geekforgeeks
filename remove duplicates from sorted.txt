@@ -1,0 +1,22 @@
+arr = [1, 2, 2, 3, 4, 4, 4, 5, 5]
+print(f"\nOrijinal massiv: {arr}")
+print("Massiv SIRALANMIŞ olduğu üçün eyni elementlər yan-yana dayanır")
+print("\nMəqsəd: Hər elementdən yalnız BİR DƏFƏ saxlayaraq yeni massiv yaratmaq")
+print("PROSES (yeni massiv yaradaraq):")
+yeni_massiv = []
+keçmiş_element = None
+print(f"\n1. Boş yeni massiv yaradırıq: []")
+for i, element in enumerate(arr):
+    print(f"\n{i+1}. addım: arr[{i}] = {element}")
+    if element != keçmiş_element:
+        yeni_massiv.append(element)
+        keçmiş_element = element
+        print(f"   {element} ≠ əvvəlki element → YENİ ELEMENT (əlavə edildi)")
+        print(f"   Yeni massiv: {yeni_massiv}")
+    else:
+        print(f"   {element} = əvvəlki element → TƏKRAR (atlandı)")
+        print(f"   Yeni massiv: {yeni_massiv}")
+print(f"NƏTİCƏ:")
+print(f"Orijinal massiv: {arr}")
+print(f"Yeni massiv: {yeni_massiv}")
+print(f"Unikal elementlərin sayı: {len(yeni_massiv)}")

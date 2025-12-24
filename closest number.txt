@@ -1,0 +1,23 @@
+n = int(input("n ədədini daxil edin: "))
+m = int(input("m ədədini daxil edin (m ≠ 0): "))
+if m == 0:
+    print("Xəta: m sıfıra bərabər ola bilməz!")
+else:
+    q = n // m
+    namized1 = m * q
+    if (n * m) > 0:  
+        namized2 = m * (q + 1)
+    else: 
+        namized2 = m * (q - 1)
+    ferq1 = abs(n - namized1)
+    ferq2 = abs(n - namized2)
+    if ferq1 < ferq2:
+        en_yaxin = namized1
+    elif ferq2 < ferq1:
+        en_yaxin = namized2
+    else:  
+        if abs(namized1) > abs(namized2):
+            en_yaxin = namized1
+        else:
+            en_yaxin = namized2
+    print(f"\n{n}-ə ən yaxın və {m}-ə bölünən ədəd: {en_yaxin}")

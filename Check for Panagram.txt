@@ -1,0 +1,16 @@
+def checkPangram(s):
+    present_letters = set()
+    for char in s:
+        if char.isalpha():
+            present_letters.add(char.lower())
+    return len(present_letters) == 26
+if __name__ == "__main__":
+    test_strings = [
+        "The quick brown fox jumps over the lazy dog",
+        "The quick brown fox jumps over the dog",
+        "Pack my box with five dozen liquor jugs",
+        "Hello World"
+    ]
+    for s in test_strings:
+        result = checkPangram(s)
+        print(f"'{s}' -> {result}")

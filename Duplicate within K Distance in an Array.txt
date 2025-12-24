@@ -1,0 +1,44 @@
+def has_duplicate_within_k(arr, k):
+    """
+    Check if array has duplicates within k distance using sliding window
+    """
+    window = set()
+    
+    for i, num in enumerate(arr):
+        if num in window:
+            return True
+        
+        window.add(num)
+        
+        # Maintain window size of k
+        if i >= k:
+            window.remove(arr[i - k])
+    
+    return False
+
+def has_duplicate_within_k_dict(arr, k):
+    """
+    Check duplicates using dictionary to store last seen indices
+    """
+    last_seen = {}
+    
+    for i, num in enumerate(arr):
+        if num in last_seen and i - last_seen[num] <= k:
+            return True
+        last_seen[num] = i
+    
+    return False
+
+# Test with examples
+if __name__ == "__main__":
+    test_cases = [
+        ([1, 2, 3, 4, 1, 2, 3, 4], 3),
+        ([1, 2, 3, 1, 4, 5], 3),
+        ([1, 2, 3, 4, 5], 3),
+        ([1, 1], 1)
+    ]
+    
+    for arr, k in test_cases:
+        result1 = has_duplicate_within_k(arr, k)
+        result2 = has_duplicate_within_k_dict(arr, k)
+        print(f"Array {arr} has duplicates within {k}: {result1} (both methods agree: {result1 == result2})")

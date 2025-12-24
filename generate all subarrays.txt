@@ -1,0 +1,18 @@
+arr = [1, 2, 3]
+print(f"\nOrijinal massiv: {arr}")
+print("Alt massiv: Aralıq elementlərin davamlı ardıcıllığı")
+print("Nümunə: [1, 2, 3] üçün [1, 2] alt massivdir, [1, 3] alt massiv DEYİL")
+print("BÜTÜN ALT MASSİVLƏR (ADDIM-ADDIM):")
+alt_massivlər = []
+for başlanğıc in range(len(arr)):
+    print(f"\nBaşlanğıc indeks {başlanğıc} (element: {arr[başlanğıc]}):")
+    for son in range(başlanğıc, len(arr)):
+        alt_massiv = arr[başlanğıc:son+1]
+        alt_massivlər.append(alt_massiv)
+        print(f"  Başlanğıc {başlanğıc}, Son {son}: {alt_massiv}")
+print(f"BÜTÜN ALT MASSİVLƏR ({len(alt_massivlər)} ədəd):")
+for i, alt in enumerate(alt_massivlər):
+    print(f"  {i+1:2d}. {alt}")
+print("QISA FORMULA:")
+print(f"{len(arr)} elementli massiv üçün alt massiv sayı: n*(n+1)/2")
+print(f"{len(arr)}*( {len(arr)}+1)/2 = {len(arr)*(len(arr)+1)//2} alt massiv")

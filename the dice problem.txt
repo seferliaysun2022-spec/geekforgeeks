@@ -1,0 +1,10 @@
+n = int(input("\nZarın üzündəki nömrəni daxil edin (1-6): "))
+if n < 1 or n > 6:
+    print("Xəta! 1-6 arası ədəd daxil edin.")
+qarsi = 7 - n
+print(f"ÜZ: {n}")
+print(f"QARŞI ÜZ: {qarsi}")
+print(f"\n Digər məlumatlar:")
+print(f"   • {n} və {qarsi} qarşı üzlərdir")
+print(f"   • Onların cəmi həmişə 7-dir")
+            

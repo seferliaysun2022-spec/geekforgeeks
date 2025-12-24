@@ -1,0 +1,83 @@
+
+def test_substring_methods():
+    test_cases = [
+        ("geeksforgeeks", "eks", 2),
+        ("geeksforgeeks", "xyz", -1),
+        ("hello world", "world", 6),
+        ("abc", "abc", 0),
+        ("abc", "abcd", -1),
+        ("", "a", -1),
+        ("a", "", 0),
+        ("mississippi", "issip", 4),
+        ("aaa", "aa", 0)
+    ]
+    
+    methods = [
+        ("Nested Loops", findSubstring),
+        ("Built-in", findSubstring_builtin),
+        ("KMP", findSubstring_kmp),
+        ("Rabin-Karp", findSubstring_rabin_karp)
+    ]
+    
+    print("Testing All Substring Search Methods:")
+    print("Text\t\t\tPattern\tExpected\t" + "\t".join([name for name, _ in methods]))
+    print("-" * 90)
+    
+    for txt, pat, expected in test_cases:
+        results = []
+        for name, method in methods:
+            try:
+                result = method(txt, pat)
+                results.append(str(result))
+            except Exception as e:
+                results.append(f"Error")
+        
+        txt_display = txt[:15] + "..." if len(txt) > 15 else txt
+        pat_display = pat[:10] + "..." if len(pat) > 10 else pat
+        
+        print(f"{txt_display:<20} {pat_display:<15} {expected:<8} " + "\t".join(results))
+
+
+def performance_test():
+    print("\n" + "="*90)
+    print("Performance Test:")
+    
+    import time
+    
+
+    txt = "a" * 10000 + "b" + "a" * 10000
+    pat = "a" * 100 + "b" + "a" * 100
+    
+    methods = [
+        ("Nested Loops", findSubstring),
+        ("Built-in", findSubstring_builtin),
+        ("KMP", findSubstring_kmp),
+        ("Rabin-Karp", findSubstring_rabin_karp)
+    ]
+    
+    for name, method in methods:
+        start_time = time.time()
+        result = method(txt, pat)
+        end_time = time.time()
+        print(f"{name}: {end_time - start_time:.6f} seconds (result: {result})")
+
+
+if __name__ == "__main__":
+
+    txt1 = "geeksforgeeks"
+    pat1 = "eks"
+    
+    print(f"Input: txt = '{txt1}', pat = '{pat1}'")
+    print(f"Nested Loops Output: {findSubstring(txt1, pat1)}")  
+    print(f"Built-in Output: {findSubstring_builtin(txt1, pat1)}") 
+    
+    txt2 = "geeksforgeeks"
+    pat2 = "xyz"
+    print(f"\nInput: txt = '{txt2}', pat = '{pat2}'")
+    print(f"Nested Loops Output: {findSubstring(txt2, pat2)}") 
+    
+
+    print("\n" + "="*90)
+    test_substring_methods()
+
+    performance_test()

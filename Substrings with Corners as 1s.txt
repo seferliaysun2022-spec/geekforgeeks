@@ -1,0 +1,26 @@
+def binarySubstring(s):
+    ones = 0
+    
+    for char in s:
+        if char == '1':
+            ones += 1
+
+    return (ones * (ones - 1)) // 2
+
+
+
+if __name__ == "__main__":
+
+    test_strings = [
+        "00100101",
+        "1001", 
+        "111",
+        "000",
+        "1",
+        "11",
+        "1010"
+    ]
+    
+    for s in test_strings:
+        result = binarySubstring(s)
+        print(f"Input: '{s}' -> Output: {result}")

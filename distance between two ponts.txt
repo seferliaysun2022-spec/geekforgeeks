@@ -1,0 +1,23 @@
+import math
+print("\nBirinci nöqtənin koordinatları:")
+x1 = float(input("x1 = "))
+y1 = float(input("y1 = "))
+print("\nİkinci nöqtənin koordinatları:")
+x2 = float(input("x2 = "))
+y2 = float(input("y2 = "))
+fərq_x = x2 - x1
+fərq_y = y2 - y1
+print(f"\nKoordinat fərqləri:")
+print(f"x2 - x1 = {x2} - {x1} = {fərq_x}")
+print(f"y2 - y1 = {y2} - {y1} = {fərq_y}")
+kvadrat_x = fərq_x ** 2
+kvadrat_y = fərq_y ** 2
+print(f"\nKvadratlar:")
+print(f"({fərq_x})² = {kvadrat_x}")
+print(f"({fərq_y})² = {kvadrat_y}")
+cəm = kvadrat_x + kvadrat_y
+məsafə = math.sqrt(cəm)
+print(f"\nKvadratların cəmi: {kvadrat_x} + {kvadrat_y} = {cəm}")
+print(f"Kvadrat kök: √{cəm} = {məsafə:.6f}")
+print(f"İKİ NOQTƏ ARASINDAKİ MƏSAFƏ: {məsafə:.6f}")
+print(f"A({x1}, {y1}) və B({x2}, {y2}) nöqtələri")

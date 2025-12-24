@@ -1,0 +1,25 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def is_circular(head):
+    if not head:
+        return True
+    
+    current = head
+    
+    while current:
+        if current.next == head:
+            return True
+        current = current.next
+    
+    return False
+
+head = Node(1)
+head.next = Node(2)
+head.next.next = Node(3)
+head.next.next.next = Node(4)
+print(is_circular(head)) 
+head.next.next.next.next = head
+print(is_circular(head)) 

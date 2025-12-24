@@ -1,0 +1,35 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def singly_to_circular(head):
+    if not head:
+        return None
+    
+    current = head
+    while current.next:
+        current = current.next
+
+    current.next = head
+    
+    return head
+
+def print_circular(head):
+    if not head:
+        print("Boş siyahı")
+        return
+    
+    current = head
+    count = 0
+    max_nodes = 10 
+    
+    while current and count < max_nodes:
+        print(current.data, end=" → ")
+        current = current.next
+        count += 1
+        if current == head:
+            print("... (dairəvi)")
+            return
+    
+    print() 

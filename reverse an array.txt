@@ -1,0 +1,15 @@
+arr = [1, 4, 3, 2, 6, 5]
+print(f"\nOrijinal massiv: {arr}")
+orijinal = arr.copy()
+uzunluq = len(arr)
+print(f"\nMassivin uzunluğu: {uzunluq} element")
+print("Elementləri ortadan bölürük və tərəfləri dəyişirik:")
+for i in range(uzunluq // 2):
+    print(f"\n{i+1}. addım:")
+    print(f"   arr[{i}] = {arr[i]} ↔ arr[{uzunluq-i-1}] = {arr[uzunluq-i-1]}")
+    arr[i], arr[uzunluq-i-1] = arr[uzunluq-i-1], arr[i]
+    print(f"   Dəyişdikdən sonra: {arr}")
+
+print(f"NƏTİCƏ:")
+print(f"Orijinal: {orijinal}")
+print(f"Tərsinə:  {arr}")

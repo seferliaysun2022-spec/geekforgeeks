@@ -1,0 +1,106 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def create_circular_list(values):
+    """Listdən dairəvi əlaqəli siyahı yarat"""
+    if not values:
+        return None
+    
+    head = Node(values[0])
+    current = head
+    
+    for value in values[1:]:
+        new_node = Node(value)
+        current.next = new_node
+        current = new_node
+    current.next = head
+    return head
+
+def print_circular(head):
+    """Dairəvi siyahını çap et"""
+    if not head:
+        print("Boş siyahı")
+        return
+    
+    current = head
+    result = []
+    
+    while True:
+        result.append(str(current.data))
+        current = current.next
+        if current == head:
+            break
+    
+    print(" → ".join(result) + " → ...")
+
+def exchange_first_last_by_links(head):
+    """Linkləri dəyişərək birinci və sonuncu node-ları dəyiş"""
+    if not head: 
+        return None
+    
+    if head.next == head:  
+        return head
+    
+    if head.next.next == head:  
+        new_head = head.next
+        new_head.next = head
+        head.next = new_head
+        return new_head
+    
+
+    prev_last = head
+    while prev_last.next.next != head:
+        prev_last = prev_last.next
+    
+    last = prev_last.next  
+    first = head  
+
+    last.next = first.next
+    
+    prev_last.next = first
+    
+ 
+    first.next = last
+    
+    return last
+
+def exchange_first_last_by_values(head):
+    """Dəyərləri dəyişərək birinci və sonuncu node-ları dəyiş"""
+    if not head:
+        return None
+    
+    if head.next == head:  
+        return head
+    
+    last = head
+    while last.next != head:
+        last = last.next
+  
+    head.data, last.data = last.data, head.data
+    return head
+print("TEST 1: [5, 4, 3, 2, 1]")
+print("=" * 40)
+head = create_circular_list([5, 4, 3, 2, 1])
+print("Əvvəl: ", end="")
+print_circular(head)
+head = exchange_first_last_by_links(head)
+print("Sonra: ", end="")
+print_circular(head)
+print("\nTEST 2: [6, 1, 2, 3, 4, 5, 6, 7, 8, 9]")
+print("=" * 40)
+head = create_circular_list([6, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+print("Əvvəl: ", end="")
+print_circular(head)
+head = exchange_first_last_by_links(head)
+print("Sonra: ", end="")
+print_circular(head)
+print("\nTEST 3: [10, 20, 30, 40] - Dəyərləri dəyişmə üsulu")
+print("=" * 40)
+head = create_circular_list([10, 20, 30, 40])
+print("Əvvəl: ", end="")
+print_circular(head)
+head = exchange_first_last_by_values(head)
+print("Sonra: ", end="")
+print_circular(head)

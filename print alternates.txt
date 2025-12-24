@@ -1,0 +1,10 @@
+print("MASSİVİN BİR ELEMENTİNİ, BİRİNİ ATLAYARAQ ÇAP ETMƏK")
+print("=" * 50)
+arr = [10, 20, 30, 40, 50]
+print(f"\nOrijinal massiv: {arr}")
+print("Birinci elementdən başlayaraq bir atlayıb bir götürürük:")
+nəticə = []
+for i in range(0, len(arr), 2):  
+    nəticə.append(arr[i])
+    print(f"  İndeks {i}: {arr[i]} (alındı)")
+print(f"\nNəticə: {nəticə}")

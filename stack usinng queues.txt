@@ -1,0 +1,244 @@
+from collections import deque
+import time
+
+class StackQueue1:  # Yanaşma 1
+    def __init__(self):
+        self.q1 = deque()
+        self.q2 = deque()
+    
+    def push(self, x):
+        self.q2.append(x)
+        while self.q1:
+            self.q2.append(self.q1.popleft())
+        self.q1, self.q2 = self.q2, self.q1
+    
+    def pop(self):
+        if self.empty():
+            return None
+        return self.q1.popleft()
+    
+    def top(self):
+        if self.empty():
+            return -1
+        return self.q1[0]
+    
+    def size(self):
+        return len(self.q1)
+    
+    def empty(self):
+        return len(self.q1) == 0
+    
+    def display(self):
+        print("   q1:", list(self.q1))
+        print("   q2:", list(self.q2))
+
+
+class StackQueue2:  # Yanaşma 2
+    def __init__(self):
+        self.q1 = deque()
+        self.q2 = deque()
+    
+    def push(self, x):
+        self.q1.append(x)
+    
+    def pop(self):
+        if self.empty():
+            return None
+        
+        while len(self.q1) > 1:
+            self.q2.append(self.q1.popleft())
+        
+        top = self.q1.popleft()
+        self.q1, self.q2 = self.q2, self.q1
+        return top
+    
+    def top(self):
+        if self.empty():
+            return -1
+        
+        while len(self.q1) > 1:
+            self.q2.append(self.q1.popleft())
+        
+        top = self.q1.popleft()
+        self.q2.append(top)
+        self.q1, self.q2 = self.q2, self.q1
+        return top
+    
+    def size(self):
+        return len(self.q1)
+    
+    def empty(self):
+        return len(self.q1) == 0
+    
+    def display(self):
+        print("   q1:", list(self.q1))
+        print("   q2:", list(self.q2))
+
+
+class StackQueue3: 
+    def __init__(self):
+        self.q = deque()
+    
+    def push(self, x):
+        size = len(self.q)
+        self.q.append(x)
+        for _ in range(size):
+            self.q.append(self.q.popleft())
+    
+    def pop(self):
+        if self.empty():
+            return None
+        return self.q.popleft()
+    
+    def top(self):
+        if self.empty():
+            return -1
+        return self.q[0]
+    
+    def size(self):
+        return len(self.q)
+    
+    def empty(self):
+        return len(self.q) == 0
+    
+    def display(self):
+        print("   q:", list(self.q))
+
+
+def test_performance():
+    """Müxtəlif yanaşmaların performansını test et"""
+    print("⚡ PERFORMANS TESTİ")
+    print("=" * 50)
+    
+    test_sizes = [100, 1000, 5000]
+    
+    for size in test_sizes:
+        print(f"\nTest ölçüsü: {size}")
+        print("-" * 30)
+        
+        # Yanaşma 1 testi
+        start = time.time()
+        stack1 = StackQueue1()
+        for i in range(size):
+            stack1.push(i)
+        for i in range(size):
+            stack1.pop()
+        time1 = time.time() - start
+        
+        # Yanaşma 2 testi
+        start = time.time()
+        stack2 = StackQueue2()
+        for i in range(size):
+            stack2.push(i)
+        for i in range(size):
+            stack2.pop()
+        time2 = time.time() - start
+        
+        # Yanaşma 3 testi
+        start = time.time()
+        stack3 = StackQueue3()
+        for i in range(size):
+            stack3.push(i)
+        for i in range(size):
+            stack3.pop()
+        time3 = time.time() - start
+        
+        print(f"Yanaşma 1 (Push O(n), Pop O(1)): {time1:.4f} saniyə")
+        print(f"Yanaşma 2 (Push O(1), Pop O(n)): {time2:.4f} saniyə")
+        print(f"Yanaşma 3 (Bir Queue, Push O(n)): {time3:.4f} saniyə")
+
+
+def main():
+    print("=" * 60)
+    print("🚀 QUEUE İLƏ STACK İMPLEMENTASİYASI")
+    print("=" * 60)
+    
+    print("\n🎯 3 Müxtəlif Yanaşma:")
+    print("1. İki Queue - Push O(n), Pop O(1)")
+    print("2. İki Queue - Push O(1), Pop O(n)")
+    print("3. Bir Queue - Push O(n), Pop O(1)")
+    
+    method = input("\nSeçim edin (1/2/3): ")
+    
+    if method == "1":
+        stack = StackQueue1()
+        print("\n✅ Yanaşma 1 seçildi: Push O(n), Pop O(1)")
+    elif method == "2":
+        stack = StackQueue2()
+        print("\n✅ Yanaşma 2 seçildi: Push O(1), Pop O(n)")
+    elif method == "3":
+        stack = StackQueue3()
+        print("\n✅ Yanaşma 3 seçildi: Bir Queue, Push O(n)")
+    else:
+        print("❌ Yanlış seçim!")
+        return
+    
+    while True:
+        print("\n" + "=" * 40)
+        print("📋 ƏMƏLİYYATLAR")
+        print("=" * 40)
+        print("1. Push (Element əlavə et)")
+        print("2. Pop (Element sil)")
+        print("3. Top (Üst element)")
+        print("4. Ölçü")
+        print("5. Boş/Yoxla")
+        print("6. Görüntülə")
+        print("7. Performans testi")
+        print("8. Çıxış")
+        print("=" * 40)
+        
+        choice = input("Seçim (1-8): ")
+        
+        if choice == "1":
+            try:
+                value = int(input("Ədəd daxil edin: "))
+                stack.push(value)
+                print(f"✅ {value} əlavə edildi")
+            except ValueError:
+                print("❌ Rəqəm daxil edin!")
+        
+        elif choice == "2":
+            result = stack.pop()
+            if result is not None:
+                print(f"✅ Silindi: {result}")
+            else:
+                print("❌ Stack boşdur!")
+        
+        elif choice == "3":
+            result = stack.top()
+            if result != -1:
+                print(f"👆 Üst element: {result}")
+            else:
+                print("❌ Stack boşdur!")
+        
+        elif choice == "4":
+            print(f"📏 Stack ölçüsü: {stack.size()}")
+        
+        elif choice == "5":
+            if stack.empty():
+                print("✅ Stack BOŞDUR")
+            else:
+                print("✅ Stack BOŞ DEYİL")
+        
+        elif choice == "6":
+            print("\n📊 Stack vəziyyəti:")
+            stack.display()
+            print(f"   Ölçü: {stack.size()}")
+            print(f"   Boşmu: {'Bəli' if stack.empty() else 'Xeyr'}")
+        
+        elif choice == "7":
+            test_performance()
+        
+        elif choice == "8":
+            print("\n👋 Proqramdan çıxılır...")
+            break
+        
+        else:
+            print("❌ Yanlış seçim!")
+        
+        if choice != "8":
+            input("\n⏎ Davam etmək üçün Enter basın...")
+
+
+if __name__ == "__main__":
+    main()

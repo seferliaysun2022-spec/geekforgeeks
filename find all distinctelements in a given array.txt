@@ -1,0 +1,22 @@
+def remove_duplicates_simple(arr):
+    """Remove duplicates using set (order not preserved)"""
+    return list(set(arr))
+def remove_duplicates_ordered(arr):
+    """Remove duplicates while preserving order"""
+    return list(dict.fromkeys(arr))
+
+if __name__ == "__main__":
+    test_arrays = [
+        [2, 2, 3, 3, 7, 5],
+        [1, 2, 3, 4, 5],
+        [1, 1, 1, 1, 1],
+        [5, 4, 3, 2, 1, 1, 2, 3, 4, 5]
+    ]
+    
+    for arr in test_arrays:
+        result_simple = remove_duplicates_simple(arr)
+        result_ordered = remove_duplicates_ordered(arr)
+        print(f"Input: {arr}")
+        print(f"Simple (no order): {result_simple}")
+        print(f"Ordered: {result_ordered}")
+        print()

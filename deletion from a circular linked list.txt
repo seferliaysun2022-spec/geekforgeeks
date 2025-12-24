@@ -1,0 +1,135 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class CircularLinkedList:
+    def __init__(self):
+        self.last = None
+    
+    def add_to_end(self, data):
+        new_node = Node(data)
+        
+        if not self.last:
+            self.last = new_node
+            new_node.next = new_node
+            return
+        
+        new_node.next = self.last.next
+        self.last.next = new_node
+        self.last = new_node
+    
+    def delete_first(self):
+        if not self.last:
+            print("Siyahı boşdur!")
+            return
+        
+        
+        if self.last.next == self.last:
+            self.last = None
+            return
+
+        head = self.last.next
+        self.last.next = head.next
+    
+    def delete_last(self):
+        if not self.last:
+            print("Siyahı boşdur!")
+            return
+    
+        if self.last.next == self.last:
+            self.last = None
+            return
+        
+        current = self.last.next
+        while current.next != self.last:
+            current = current.next
+        
+        current.next = self.last.next
+        self.last = current
+    
+    def delete_node(self, key):
+        if not self.last:
+            print("Siyahı boşdur!")
+            return
+    
+        if self.last.next == self.last:
+            if self.last.data == key:
+                self.last = None
+            else:
+                print(f"{key} tapılmadı!")
+            return
+ 
+        if self.last.next.data == key:
+            self.last.next = self.last.next.next
+            return
+   
+        current = self.last.next
+        prev = self.last
+        
+        while True:
+            if current.data == key:
+                prev.next = current.next
+           
+                if current == self.last:
+                    self.last = prev
+                return
+            
+            prev = current
+            current = current.next
+            
+            if current == self.last.next:  
+                break
+        
+        print(f"{key} tapılmadı!")
+    
+    def display(self):
+        if not self.last:
+            print("Siyahı boşdur!")
+            return
+        
+        current = self.last.next
+        result = []
+        
+        while True:
+            result.append(str(current.data))
+            current = current.next
+            if current == self.last.next:
+                break
+        
+        print(" → ".join(result) + " → ...")
+
+if __name__ == "__main__":
+    cll = CircularLinkedList()
+    
+    print("1. Boş siyahı:")
+    cll.display()
+    
+    print("\n2. 5 node əlavə edilir:")
+    for i in [10, 20, 30, 40, 50]:
+        cll.add_to_end(i)
+    cll.display()
+    
+    print("\n3. Başlanğıcdan silinir (10):")
+    cll.delete_first()
+    cll.display()
+    
+    print("\n4. Sonuncudan silinir (50):")
+    cll.delete_last()
+    cll.display()
+    
+    print("\n5. Ortadan node silinir (30):")
+    cll.delete_node(30)
+    cll.display()
+    
+    print("\n6. Mövcud olmayan node silinməyə çalışır (100):")
+    cll.delete_node(100)
+    cll.display()
+    
+    print("\n7. Tək node qalana qədər silinir:")
+    cll.delete_last()  # 40 silinir
+    cll.display()
+    
+    print("\n8. Sonuncu node silinir (20):")
+    cll.delete_last()
+    cll.display()

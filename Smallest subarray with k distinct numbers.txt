@@ -1,0 +1,56 @@
+from collections import defaultdict
+
+def find_smallest_subarray_with_k_distinct(arr, k):
+    """
+    Find smallest subarray with exactly k distinct elements
+    Returns [start, end] indices or [-1, -1] if not found
+    """
+    if k <= 0 or not arr:
+        return [-1, -1]
+    
+    n = len(arr)
+    freq = defaultdict(int)
+    left = 0
+    distinct_count = 0
+    min_length = float('inf')
+    result = [-1, -1]
+    
+    for right in range(n):
+        # Add current element to window
+        if freq[arr[right]] == 0:
+            distinct_count += 1
+        freq[arr[right]] += 1
+        
+        # Shrink window while we have exactly k distinct elements
+        while distinct_count == k:
+            current_length = right - left + 1
+            # Update result if we found a smaller window
+            if current_length < min_length:
+                min_length = current_length
+                result = [left, right]
+            
+            # Remove left element from window
+            freq[arr[left]] -= 1
+            if freq[arr[left]] == 0:
+                distinct_count -= 1
+            left += 1
+    
+    return result
+
+# Test with examples
+if __name__ == "__main__":
+    test_cases = [
+        ([1, 1, 2, 2, 3, 3, 4, 5], 3),
+        ([1, 2, 2, 3], 2),
+        ([1, 1, 2, 1, 2], 3),
+        ([1, 2, 3, 4, 5], 3)
+    ]
+    
+    for arr, k in test_cases:
+        result = find_smallest_subarray_with_k_distinct(arr, k)
+        if result[0] == -1:
+            print(f"No subarray with {k} distinct elements in {arr}")
+        else:
+            start, end = result
+            subarray = arr[start:end+1]
+            print(f"Smallest subarray with {k} distinct elements in {arr}: indices {result}, subarray {subarray}")

@@ -1,0 +1,8 @@
+a = int(input("\nBirinci ədədi daxil edin (a): "))
+b = int(input("İkinci ədədi daxil edin (b): "))
+print(f"\nƏvvəlki dəyərlər: a = {a}, b = {b}")
+a1, b1 = a, b  
+temp = a1
+a1 = b1
+b1 = temp
+print(f"   a = {a1}, b = {b1}")

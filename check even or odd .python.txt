@@ -1,0 +1,7 @@
+print("Rəqəmin cüt və ya tək olduğunu yoxlayan proqram")
+number = int(input("Rəqəmi daxil edin: "))
+
+if number % 2 == 0:
+    print(f"{number} cüt rəqəmdir (True)")
+else:
+    print(f"{number} tək rəqəmdir (False)")

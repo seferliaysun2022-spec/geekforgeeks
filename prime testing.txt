@@ -1,0 +1,13 @@
+n = int(input("Ədədi daxil edin: "))
+if n <= 1:
+    print(f"{n} sadə ədəd deyil")
+else:
+    sadədir = True
+    for i in range(2, n):
+        if n % i == 0: 
+            sadədir = False
+            break  
+    if sadədir:
+        print(f"{n} sadə ədəddir")
+    else:
+        print(f"{n} sadə ədəd deyil")

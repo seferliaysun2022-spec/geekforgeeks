@@ -1,0 +1,8 @@
+a = int(input("Ədədi daxil edin: "))
+cem = 0
+eded = a  
+while eded > 0:
+    son_reqem = eded % 10
+    cem = cem + son_reqem
+    eded = eded // 10
+print(f"{a} ədədinin rəqəmlərinin cəmi: {cem}")

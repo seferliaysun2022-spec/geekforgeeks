@@ -1,0 +1,17 @@
+arr = [10, 20, 30, 40, 50]
+print(f"\nOrijinal massiv: {arr}")
+sıralanıb = True
+for i in range(len(arr) - 1):
+    cari = arr[i]
+    sonrakı = arr[i + 1]
+    print(f"\n{i+1}. Müqayisə: arr[{i}] = {cari}   VS   arr[{i+1}] = {sonrakı}")
+    if cari <= sonrakı:
+        print(f"   {cari} ≤ {sonrakı} → DÜZGÜN")
+    else:
+        print(f"   {cari} > {sonrakı} → SƏHV! (massiv sıralanmayıb)")
+        sıralanıb = False
+        break
+if sıralanıb:
+    print("✓ MASSİV SIRALANIB (ARTAN SIRA İLƏ)")
+else:
+    print("✗ MASSİV SIRALANMAYIB")

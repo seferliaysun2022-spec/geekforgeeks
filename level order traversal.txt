@@ -1,0 +1,309 @@
+from collections import deque
+
+class TreeNode:
+    def __init__(self, value):
+        self.data = value
+        self.left = None
+        self.right = None
+
+def create_sample_tree():
+    """Nümunə ağac yarat"""
+    # Ağac quruluşu:
+    #       5
+    #      / \
+    #    12   13
+    #   /  \    \
+    #  7    14   2
+    # / \   / \ / \
+    #17 23 27 3 8 11
+    
+    root = TreeNode(5)
+    
+    # Level 1
+    root.left = TreeNode(12)
+    root.right = TreeNode(13)
+    
+    # Level 2
+    root.left.left = TreeNode(7)
+    root.left.right = TreeNode(14)
+    root.right.right = TreeNode(2)
+    
+    # Level 3
+    root.left.left.left = TreeNode(17)
+    root.left.left.right = TreeNode(23)
+    root.left.right.left = TreeNode(27)
+    root.left.right.right = TreeNode(3)
+    root.right.right.left = TreeNode(8)
+    root.right.right.right = TreeNode(11)
+    
+    return root
+
+def level_order_recursive(root, level, result):
+    """Rekursiv üsul"""
+    if root is None:
+        return
+    
+    if len(result) <= level:
+        result.append([])
+    
+    result[level].append(root.data)
+    level_order_recursive(root.left, level + 1, result)
+    level_order_recursive(root.right, level + 1, result)
+
+def level_order_iterative(root):
+    """Queue ilə iterativ üsul"""
+    if root is None:
+        return []
+    
+    result = []
+    queue = deque([root])
+    
+    while queue:
+        level_size = len(queue)
+        current_level = []
+        
+        for _ in range(level_size):
+            node = queue.popleft()
+            current_level.append(node.data)
+            
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        
+        result.append(current_level)
+    
+    return result
+
+def level_order_with_separator(root):
+    """Səviyyələri ayrı-ayrı göstər"""
+    if root is None:
+        return []
+    
+    result = []
+    queue = deque([root, None])  # None səviyyə ayırıcısı kimi
+    
+    current_level = []
+    
+    while queue:
+        node = queue.popleft()
+        
+        if node is None:
+            # Səviyyə bitdi
+            result.append(current_level.copy())
+            current_level = []
+            
+            # Əgər queue boş deyilsə, yeni ayırıcı əlavə et
+            if queue:
+                queue.append(None)
+        else:
+            # Node əlavə et
+            current_level.append(node.data)
+            
+            # Uşaqları əlavə et
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+    
+    return result
+
+def print_tree_structure():
+    """Ağacın quruluşunu vizual çap et"""
+    print("\n🌳 AĞAC QURULUŞU:")
+    print("=" * 40)
+    print("""
+          5
+        /   \\
+      12     13
+     /  \\      \\
+    7    14     2
+   / \\   / \\   / \\
+  17 23 27 3  8  11
+    """)
+    print("=" * 40)
+
+def main():
+    print("=" * 60)
+    print("🌳 LEVEL ORDER TRAVERSAL (SƏVİYYƏVİ GƏZİŞ)")
+    print("=" * 60)
+    
+    # Ağac yarat
+    root = create_sample_tree()
+    
+    while True:
+        print("\n" + "=" * 40)
+        print("📋 ƏMƏLİYYATLAR MENYUSU")
+        print("=" * 40)
+        print("1. Rekursiv üsulla gəz (DFS style)")
+        print("2. Queue ilə gəz (BFS style)")
+        print("3. Ayırıcı ilə queue gəz")
+        print("4. Ağac quruluşunu göstər")
+        print("5. Bütün üsulları müqayisə et")
+        print("6. Fərqli ağac yarat")
+        print("7. Çıxış")
+        print("=" * 40)
+        
+        choice = input("Seçim (1-7): ")
+        
+        if choice == "1":
+            print("\n🔄 REKURSİV ÜSUL:")
+            result = []
+            level_order_recursive(root, 0, result)
+            
+            print("Səviyyələr üzrə nəticə:")
+            for i, level in enumerate(result):
+                print(f"  Səviyyə {i}: {level}")
+        
+        elif choice == "2":
+            print("\n🔄 QUEUE İLƏ ITERATİV ÜSUL:")
+            result = level_order_iterative(root)
+            
+            print("Səviyyələr üzrə nəticə:")
+            for i, level in enumerate(result):
+                print(f"  Səviyyə {i}: {level}")
+        
+        elif choice == "3":
+            print("\n🔄 AYIRICI İLƏ QUEUE ÜSULU:")
+            result = level_order_with_separator(root)
+            
+            print("Səviyyələr üzrə nəticə:")
+            for i, level in enumerate(result):
+                print(f"  Səviyyə {i}: {level}")
+        
+        elif choice == "4":
+            print_tree_structure()
+        
+        elif choice == "5":
+            print("\n⚡ BÜTÜN ÜSULLARIN MÜQAYİSƏSİ:")
+            print("-" * 40)
+            
+            # Rekursiv
+            result_rec = []
+            level_order_recursive(root, 0, result_rec)
+            print("1. Rekursiv: ", result_rec)
+            
+            # Iterative queue
+            result_iter = level_order_iterative(root)
+            print("2. Queue ilə: ", result_iter)
+            
+            # Ayırıcı ilə
+            result_sep = level_order_with_separator(root)
+            print("3. Ayırıcı ilə: ", result_sep)
+            
+            # Müqayisə
+            print("\n✅ Nəticələr eynidirmi?", 
+                  "Bəli" if result_rec == result_iter == result_sep else "Xeyr")
+        
+        elif choice == "6":
+            print("\n🌱 YENİ AĞAC YARADILIR...")
+            print("Mövcud ağac:")
+            print_tree_structure()
+            
+            # Sadə ağac yarat
+            simple_root = TreeNode(1)
+            simple_root.left = TreeNode(2)
+            simple_root.right = TreeNode(3)
+            simple_root.left.left = TreeNode(4)
+            simple_root.left.right = TreeNode(5)
+            
+            print("\nYeni ağac (1-2-3-4-5):")
+            result = level_order_iterative(simple_root)
+            for i, level in enumerate(result):
+                print(f"  Səviyyə {i}: {level}")
+        
+        elif choice == "7":
+            print("\n👋 Proqramdan çıxılır...")
+            break
+        
+        else:
+            print("❌ Yanlış seçim!")
+        
+        if choice != "7":
+            input("\n⏎ Davam etmək üçün Enter basın...")
+
+# Əlavə Faydalı Funksiyalar
+
+def reverse_level_order(root):
+    """Tərs səviyyəvi gəziş (aşağıdan yuxarı)"""
+    if root is None:
+        return []
+    
+    result = []
+    queue = deque([root])
+    
+    while queue:
+        level_size = len(queue)
+        current_level = []
+        
+        for _ in range(level_size):
+            node = queue.popleft()
+            current_level.append(node.data)
+            
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        
+        result.insert(0, current_level)  # Əvvələ əlavə et
+    
+    return result
+
+def zigzag_level_order(root):
+    """Zigzag səviyyəvi gəziş"""
+    if root is None:
+        return []
+    
+    result = []
+    queue = deque([root])
+    left_to_right = True
+    
+    while queue:
+        level_size = len(queue)
+        current_level = deque()
+        
+        for _ in range(level_size):
+            node = queue.popleft()
+            
+            if left_to_right:
+                current_level.append(node.data)
+            else:
+                current_level.appendleft(node.data)
+            
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        
+        result.append(list(current_level))
+        left_to_right = not left_to_right  # İstiqaməti dəyiş
+    
+    return result
+
+def level_averages(root):
+    """Hər səviyyənin ortalaması"""
+    if root is None:
+        return []
+    
+    result = []
+    queue = deque([root])
+    
+    while queue:
+        level_size = len(queue)
+        level_sum = 0
+        
+        for _ in range(level_size):
+            node = queue.popleft()
+            level_sum += node.data
+            
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        
+        result.append(level_sum / level_size)
+    
+    return result
+
+if __name__ == "__main__":
+    main()

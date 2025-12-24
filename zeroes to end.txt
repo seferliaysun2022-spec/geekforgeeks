@@ -1,0 +1,21 @@
+arr = [1, 2, 0, 4, 3, 0, 5, 0]
+print(f"\nOrijinal massiv: {arr}")
+orijinal = arr.copy()
+yeni_massiv = []
+sıfır_sayı = 0
+print(f"\n1. Bütün qeyri-sıfır elementləri götürürük:")
+for element in arr:
+    if element != 0:
+        yeni_massiv.append(element)
+        print(f"   {element} ≠ 0 → əlavə edildi: {yeni_massiv}")
+    else:
+        sıfır_sayı += 1
+        print(f"   {element} = 0 → atlandı (sıfır sayı: {sıfır_sayı})")
+print(f"\n2. {sıfır_sayı} sıfırı sona əlavə edirik:")
+for i in range(sıfır_sayı):
+    yeni_massiv.append(0)
+    print(f"   {i+1}. sıfır əlavə edildi: {yeni_massiv}")
+print(f"NƏTİCƏ:")
+print(f"Orijinal: {orijinal}")
+print(f"Yeni:     {yeni_massiv}")
+print(f"Sıfır sayı: {sıfır_sayı}")

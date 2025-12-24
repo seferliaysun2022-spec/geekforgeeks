@@ -1,0 +1,53 @@
+ def longest_consecutive_sequence(arr):
+    """Most practical approach using set"""
+    if not arr:
+        return 0
+        
+    num_set = set(arr)
+    longest = 0
+    
+    for num in num_set:
+        # Only start counting from the beginning of a sequence
+        if num - 1 not in num_set:
+            current_num = num
+            current_length = 1
+            
+            while current_num + 1 in num_set:
+                current_num += 1
+                current_length += 1
+            
+            longest = max(longest, current_length)
+    
+    return longest
+
+def longest_consecutive_simple(arr):
+    """Simple approach for small arrays"""
+    if not arr:
+        return 0
+        
+    sorted_arr = sorted(set(arr))  # Remove duplicates and sort
+    longest = 1
+    current = 1
+    
+    for i in range(1, len(sorted_arr)):
+        if sorted_arr[i] == sorted_arr[i-1] + 1:
+            current += 1
+            longest = max(longest, current)
+        else:
+            current = 1
+    
+    return longest
+
+# Test with examples
+if __name__ == "__main__":
+    test_arrays = [
+        [2, 6, 1, 9, 4, 5, 3],
+        [1, 1, 1, 2, 2, 3],
+        [100, 4, 200, 1, 3, 2],
+        [10, 20, 30]
+    ]
+    
+    for arr in test_arrays:
+        result1 = longest_consecutive_sequence(arr)
+        result2 = longest_consecutive_simple(arr)
+        print(f"Array {arr}: Longest consecutive sequence = {result1} (both methods agree: {result1 == result2})")

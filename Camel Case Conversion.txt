@@ -1,0 +1,15 @@
+def convertToCamelCase(s):
+    words = s.split()
+    return words[0] + ''.join(word.title() for word in words[1:]) if words else ""
+
+test_cases = [
+    "i got intern at geeksforgeeks",
+    "here comes the garden",
+    "hello world",
+    "single",
+    ""
+]
+
+for test in test_cases:
+    print(f"'{test}' -> '{convertToCamelCase(test)}'")
+

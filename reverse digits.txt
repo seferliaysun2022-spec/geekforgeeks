@@ -1,0 +1,7 @@
+n = int(input("Ədədi daxil edin: "))
+ters_eded = 0
+while n > 0:
+    son_reqem = n % 10
+    ters_eded = ters_eded * 10 + son_reqem
+    n = n // 10
+print("Tərs çevrilmiş ədəd:", ters_eded)

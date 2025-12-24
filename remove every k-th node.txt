@@ -1,0 +1,94 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+def print_list(head):
+    current = head
+    while current:
+        print(current.data, end=" -> " if current.next else "")
+        current = current.next
+    print()
+def create_list(arr):
+    if not arr:
+        return None
+    head = Node(arr[0])
+    current = head
+    for value in arr[1:]:
+        current.next = Node(value)
+        current = current.next
+    return head
+def delete_kth_node(head, k, izahlı=False):
+    """
+    Linked list-dən hər k-ci node-u silir
+    """
+    if izahlı:
+        print(f"\n{'='*70}")
+        print(f"Orijinal list: ", end="")
+        print_list(head)
+        print(f"k = {k}")
+        print(f"{'='*70}")
+    if not head or k <= 1:
+        if izahlı:
+            print(f"List boşdur və ya k={k} (heç bir node silinməz)")
+        return head
+    current = head
+    previous = None
+    count = 0
+    if izahlı:
+        print(f"\nProses başlayır...")
+    while current:
+        count += 1
+        if izahlı:
+            print(f"\n{count}. node: {current.data}")
+            print(f"   count = {count}, {count} % {k} = {count % k}")
+        if count % k == 0:
+            if izahlı:
+                print(f" {current.data} silinəcək (k-ci node)")
+            if previous:
+                previous.next = current.next
+                if izahlı:
+                    print(f"   previous({previous.data}).next = current({current.data}).next")
+            else:
+                head = current.next
+                if izahlı:
+                    print(f"   head = {head.data if head else 'None'}")
+            if izahlı:
+                print(f"   Cari list: ", end="")
+                print_list(head)
+        else:
+            previous = current
+            if izahlı:
+                print(f"   previous = {current.data}")
+        current = current.next
+    if izahlı:
+        print(f"\n{'='*70}")
+        print(f"SON NƏTİCƏ: ", end="")
+        print_list(head)
+        print(f"{'='*70}")
+    return head
+print("\n1. NÜMUNƏ: 1 -> 2 -> 3 -> 4 -> 5 -> 6, k = 2")
+arr = [1, 2, 3, 4, 5, 6]
+head = create_list(arr)
+print("Orijinal: ", end="")
+print_list(head)
+head = delete_kth_node(head, 2, izahlı=True)
+print("\n2. NÜMUNƏ: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10, k = 3")
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+head = create_list(arr)
+print("Orijinal: ", end="")
+print_list(head)
+head = delete_kth_node(head, 3, izahlı=True)
+print("ÖZ NÜMUNƏNİZİ YOXLAYIN:")
+giriş = input("List elementlərini vergüllə ayıraraq daxil edin: ")
+if giriş:
+    try:
+        arr = [int(x.strip()) for x in giriş.split(",")]
+        k = int(input("k dəyərini daxil edin: "))
+        head = create_list(arr)
+        print(f"\nOrijinal list: ", end="")
+        print_list(head)
+        head = delete_kth_node(head, k, izahlı=True)
+    except:
+        print("Xəta! Zəhmət olmasa rəqəmlər daxil edin.")
+else:
+    print("List daxil edilmədi!")

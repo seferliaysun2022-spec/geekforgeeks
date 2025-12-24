@@ -1,0 +1,38 @@
+
+def are_k_anagrams(s1, s2, k):
+    """
+    Check if two strings are k-anagrams using single frequency array
+    Returns True if k-anagrams, False otherwise
+    """
+    if len(s1) != len(s2):
+        return False
+    
+    n = len(s1)
+    freq = [0] * 26
+    
+    for ch in s1:
+        freq[ord(ch) - ord('a')] += 1
+ 
+    mismatches = 0
+    for ch in s2:
+        idx = ord(ch) - ord('a')
+        if freq[idx] > 0:
+            freq[idx] -= 1
+        else:
+            mismatches += 1
+            if mismatches > k:
+                return False
+    
+    return True
+
+if __name__ == "__main__":
+    test_cases = [
+        ("anagram", "grammar", 3),
+        ("geeks", "eggkf", 1),
+        ("fodr", "gork", 2),
+        ("hello", "world", 3)
+    ]
+    
+    for s1, s2, k in test_cases:
+        result = are_k_anagrams(s1, s2, k)
+        print(f"'{s1}' and '{s2}' are {k}-anagrams: {result}")

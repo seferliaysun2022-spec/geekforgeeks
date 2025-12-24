@@ -1,0 +1,51 @@
+arr = [4, 3, 2]
+print(f"\nOrijinal massiv: {arr}")
+print(f"Element sayı: {len(arr)}")
+print("\nQAYDA:")
+print("1. İki element seçirik")
+print("2. Böyük olanı silirik")
+print("3. Xərc = kiçik elementin dəyəri")
+print("4. Bu prosesi massivdə 1 element qalana qədər təkrarlayırıq")
+minimum = min(arr)
+print(f"\nƏn kiçik element: {minimum}")
+print(f"\nSTRATEGİYA: Həmişə ən kiçik elementi digərləri ilə cütləşdirək!")
+print("Səbəb: Hər dəfə xərc = kiçik element olur")
+print("       Ən kiçik elementi saxlayaraq xərci minimuma endirə bilərik")
+print("RİYAZİ FORMULA:")
+n = len(arr)
+print(f"\n{n} elementli massiv üçün:")
+print(f"1. Başlanğıcda: {n} element")
+print(f"2. Hər əməliyyatda 1 element silinir")
+print(f"3. {n} → 1 etmək üçün: {n-1} əməliyyat lazımdır")
+print(f"4. Hər əməliyyatın xərci = minimum element = {minimum}")
+print(f"5. Ümumi xərc = ({n-1}) × {minimum} = {(n-1) * minimum}")
+print("ADDIM-ADDIM NÜMUNƏ:")
+orijinal = arr.copy()
+cari_massiv = arr.copy()
+ümumi_xərc = 0
+addım = 1
+print(f"\nBaşlanğıc massivi: {cari_massiv}")
+while len(cari_massiv) > 1:
+    print(f"\n{addım}. ƏMƏLİYYAT:")
+    min_element = min(cari_massiv)
+    min_index = cari_massiv.index(min_element)
+    digər_index = 0 if min_index != 0 else 1
+    digər_element = cari_massiv[digər_index]
+    print(f"   Seçilən cüt: ({min_element}, {digər_element})")
+    if min_element < digər_element:
+        silinən = digər_element
+        cari_massiv.pop(digər_index)
+    else:
+        silinən = min_element
+        cari_massiv.pop(min_index)
+    print(f"   Silinən element: {silinən} (böyük olan)")
+    print(f"   Xərc = kiçik element = {min(min_element, digər_element)}")
+    ümumi_xərc += min(min_element, digər_element)
+    print(f"   Ümumi xərc: {ümumi_xərc}")
+    print(f"   Qalan massiv: {cari_massiv}")
+    addım += 1
+print(f"SON NƏTİCƏ:")
+print(f"Orijinal massiv: {orijinal}")
+print(f"Final element: {cari_massiv[0]}")
+print(f"Ümumi xərc: {ümumi_xərc}")
+print(f"Formula ilə: ({len(orijinal)-1}) × {min(orijinal)} = {(len(orijinal)-1)*min(orijinal)}")

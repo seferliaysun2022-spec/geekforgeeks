@@ -1,0 +1,19 @@
+arr = [1, 2, 3, 4, 5, 6]
+d = 2
+print(f"\nOrijinal massiv: {arr}")
+print(f"Döndərmə sayı (d): {d}")
+print("Sağa döndərmə: Elementlər SAĞA sürüşür, sonuncu element birinci olur")
+orijinal = arr.copy()
+for dəfə in range(d):
+    print(f"\n{dəfə+1}. döndərmə:")
+    son_element = arr[-1]
+    print(f"   Sonuncu element: {son_element}")
+    for i in range(len(arr)-1, 0, -1):
+        arr[i] = arr[i-1]
+        print(f"   arr[{i}] = arr[{i-1}] = {arr[i]}")
+    arr[0] = son_element
+    print(f"   arr[0] = {son_element}")
+    print(f"   Nəticə: {arr}")
+print(f"SON NƏTİCƏ:")
+print(f"Orijinal: {orijinal}")
+print(f"{d} dəfə sağa döndərilmiş: {arr}")

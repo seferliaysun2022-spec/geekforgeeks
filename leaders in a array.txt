@@ -1,0 +1,31 @@
+print("MASSİVDƏKİ LİDERLƏRİ TAPMAQ")
+arr = [16, 17, 4, 3, 5, 2]
+print(f"\nOrijinal massiv: {arr}")
+print("Lider: sağındakı BÜTÜN elementlərdən böyük və ya bərabər olan element")
+print("\nSağdakı sonuncu element həmişə liderdir!")
+liderlər = []
+for i in range(len(arr)):
+    element = arr[i]
+    print(f"\nElement {i}: {element}")
+    sağdakı_elementlər = arr[i+1:] if i+1 < len(arr) else []
+    
+    if sağdakı_elementlər:
+        print(f"  Sağındakı elementlər: {sağdakı_elementlər}")
+
+        hamısından_böyük = True
+        for sağdakı in sağdakı_elementlər:
+            if element < sağdakı:
+                hamısından_böyük = False
+                print(f"  {element} < {sağdakı} → lider DEYİL")
+                break
+        
+        if hamısından_böyük:
+            liderlər.append(element)
+            print(f"  ✓ {element} bütün sağdakılardan böyükdür → LİDER")
+    else:
+
+        liderlər.append(element)
+        print(f"  ✓ Sağında element yoxdur → LİDER")
+
+
+print(f"TAPILAN LİDERLƏR: {liderlər}")

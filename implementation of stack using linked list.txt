@@ -1,0 +1,125 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class LinkedListStack:
+    def __init__(self):
+        self.top = None
+        self.count = 0
+    
+    def push(self, value):
+        new_node = Node(value)
+        new_node.next = self.top
+        self.top = new_node
+        self.count += 1
+        print(f"✅ {value} stack-ə əlavə edildi")
+    
+    def pop(self):
+        if self.is_empty():
+            print("❌ Stack boşdur!")
+            return None
+        
+        value = self.top.data
+        self.top = self.top.next
+        self.count -= 1
+        print(f"✅ {value} stack-dən silindi")
+        return value
+    
+    def peek(self):
+        if self.is_empty():
+            print("📭 Stack boşdur")
+            return None
+        return self.top.data
+    
+    def is_empty(self):
+        return self.top is None
+    
+    def size(self):
+        return self.count
+    
+    def display(self):
+        if self.is_empty():
+            print("📭 Stack boşdur")
+            return
+        
+        print("📊 Stack məlumatları:")
+        print(f"   Element sayı: {self.count}")
+        print(f"   Üst element: {self.peek()}")
+        print("   Stack (yuxarıdan aşağıya):")
+        
+        current = self.top
+        index = self.count - 1
+        
+        while current:
+            print(f"   [{index}] → {current.data}")
+            current = current.next
+            index -= 1
+
+
+def main():
+    print("=" * 50)
+    print("🔗 LINKED LIST İLƏ STACK PROQRAMI")
+    print("=" * 50)
+    
+    stack = LinkedListStack()
+    
+    while True:
+        print("\n" + "=" * 40)
+        print("📋 ƏMƏLİYYATLAR MENYUSU")
+        print("=" * 40)
+        print("1. Push (Element əlavə et)")
+        print("2. Pop (Element sil)")
+        print("3. Peek (Üst elementə bax)")
+        print("4. Stack-i göstər")
+        print("5. Boş olub-olmadığını yoxla")
+        print("6. Element sayını göstər")
+        print("7. Proqramdan çıx")
+        print("=" * 40)
+        
+        choice = input("Seçiminiz (1-7): ")
+        
+        if choice == "1":
+            try:
+                value = int(input("Əlavə ediləcək ədədi daxil edin: "))
+                stack.push(value)
+            except ValueError:
+                print("⚠️ Rəqəm daxil edin!")
+        
+        elif choice == "2":
+            result = stack.pop()
+            if result is not None:
+                print(f"📤 Silinən element: {result}")
+        
+        elif choice == "3":
+            result = stack.peek()
+            if result is not None:
+                print(f"👆 Üst element: {result}")
+        
+        elif choice == "4":
+            stack.display()
+        
+        elif choice == "5":
+            if stack.is_empty():
+                print("✅ Stack BOŞDUR")
+            else:
+                print("✅ Stack BOŞ DEYİL")
+        
+        elif choice == "6":
+            print(f"📏 Stack-dəki element sayı: {stack.size()}")
+        
+        elif choice == "7":
+            print("\n👋 Proqramdan çıxılır...")
+            print("Təşəkkürlər!")
+            break
+        
+        else:
+            print("⚠️ Yanlış seçim! 1-7 arası rəqəm daxil edin.")
+        
+        if choice != "7":
+            input("\n⏎ Davam etmək üçün Enter düyməsini basın...")
+
+
+if __name__ == "__main__":
+    main()

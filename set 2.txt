@@ -1,0 +1,5 @@
+def fun2(n):
+    if(n == 0):
+        return
+    fun2(n//2)
+    print(n % 2)
